@@ -219,10 +219,9 @@ Based on the analysis so far:
 
 ## 👤 Author
 
-**Your Name**
-- 📧 your.email@gmail.com
-- 💼 [LinkedIn](https://linkedin.com/in/yourprofile)
-- 🐙 [GitHub](https://github.com/YOUR_USERNAME)
+- 📧 krishnadhawangale066@gmail.com
+- 💼 [LinkedIn](https://www.linkedin.com/in/krishna-dhawangale-88341828b/)
+- 🐙 [GitHub](https://github.com/Krishna-Dhawangale)
 
 ---
 
