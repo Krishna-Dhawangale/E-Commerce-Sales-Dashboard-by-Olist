@@ -1,0 +1,12 @@
+# Ignore dataset CSV files
+*.csv
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# VS Code
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
