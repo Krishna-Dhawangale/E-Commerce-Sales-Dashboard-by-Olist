@@ -121,14 +121,12 @@ Generated 11 charts uncovering key business insights:
 | 11 | Late Deliveries | Northern states (AM, RR) have 20%+ late rate |
 
 ### ✅ Phase 3 — SQL Analysis 
-- 15+ SQL queries: window functions, CTEs, ranking, cohort analysis
-- Revenue by category, state, month
-- Seller performance ranking
-- Month-over-month growth calculation
 
+<<<<<<< Updated upstream
 ### ⏳ Phase 4 — RFM Customer Segmentation 
-- Recency, Frequency, Monetary scoring
-- K-Means clustering into 4 customer segments
+=======
+### ✅ Phase 4 — RFM Customer Segmentation 
+### ✅ Phase 4 — RFM Customer Segmentation 
 - Segment profiling: Champions, Loyal, At-Risk, Lost
 
 ### ⏳ Phase 5 — Revenue Forecasting *(coming soon)*
