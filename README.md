@@ -120,13 +120,13 @@ Generated 11 charts uncovering key business insights:
 | 10 | Quarterly Growth | 3x revenue growth from Q1 2017 to Q1 2018 |
 | 11 | Late Deliveries | Northern states (AM, RR) have 20%+ late rate |
 
-### ✅ Phase 3 — SQL Analysis *(coming soon)*
+### ✅ Phase 3 — SQL Analysis 
 - 15+ SQL queries: window functions, CTEs, ranking, cohort analysis
 - Revenue by category, state, month
 - Seller performance ranking
 - Month-over-month growth calculation
 
-### ⏳ Phase 4 — RFM Customer Segmentation *(coming soon)*
+### ⏳ Phase 4 — RFM Customer Segmentation 
 - Recency, Frequency, Monetary scoring
 - K-Means clustering into 4 customer segments
 - Segment profiling: Champions, Loyal, At-Risk, Lost
