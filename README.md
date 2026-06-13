@@ -48,10 +48,10 @@ This project simulates the work of a **Data Analyst at an e-commerce company**. 
 | Python 3.10+ | Data cleaning, EDA, analysis |
 | Pandas & NumPy | Data manipulation |
 | Matplotlib & Seaborn | Data visualization |
-| PostgreSQL / SQLite | SQL analysis |
+| SQLite | SQL analysis (16+ queries) |
 | Scikit-learn | RFM clustering (K-Means) |
 | Prophet | Revenue forecasting |
-| Power BI / Tableau | Interactive dashboard |
+| Power BI | Interactive dashboard |
 | GitHub | Version control & portfolio |
 
 ---
@@ -61,10 +61,7 @@ This project simulates the work of a **Data Analyst at an e-commerce company**. 
 ```
 E-Commerce-Sales-Dashboard-Olist/
 │
-├── 📂 data/                        # (not pushed — too large)
-│   └── *.csv                       # All 9 Olist CSV files
-│
-├── 📂 charts/                      # EDA output charts
+├── 📂 charts/                         # All output charts
 │   ├── chart1_monthly_revenue.png
 │   ├── chart2_top_categories.png
 │   ├── chart3_revenue_by_state.png
@@ -75,18 +72,23 @@ E-Commerce-Sales-Dashboard-Olist/
 │   ├── chart8_orders_by_day.png
 │   ├── chart9_avg_order_value.png
 │   ├── chart10_quarterly_revenue.png
-│   └── chart11_late_deliveries.png
+│   ├── chart11_late_deliveries.png
+│   ├── sql_chart1_mom_growth.png
+│   ├── sql_chart2_cumulative_revenue.png
+│   ├── sql_chart3_delivery_vs_review.png
+│   ├── rfm_chart1_elbow_curve.png
+│   ├── rfm_chart2_segment_counts.png
+│   ├── rfm_chart3_avg_spend.png
+│   ├── rfm_chart4_heatmap.png
+│   ├── rfm_chart5_scatter.png
+│   └── rfm_chart6_revenue_pie.png
 │
-├── 📂 notebooks/                   # Jupyter notebooks (coming soon)
-│   ├── 01_data_loading.ipynb
-│   ├── 02_eda.ipynb
-│   ├── 03_sql_analysis.ipynb
-│   ├── 04_rfm_segmentation.ipynb
-│   └── 05_forecasting.ipynb
-│
-├── olist_starter.py                # Step 1: Load, clean & merge all data
-├── olist_eda.py                    # Step 2: EDA with 11 charts
-├── fix_review_score.py             # Hotfix: merge review scores
+├── olist_starter.py                   # Step 1: Load, clean & merge all data
+├── olist_eda.py                       # Step 2: EDA — 11 charts
+├── fix_review_score.py                # Hotfix: merge review scores
+├── olist_sql_analysis.py              # Step 3: SQL — 16 queries + 3 charts
+├── fix_query12.py                     # Hotfix: SQLite window function fix
+├── olist_rfm_fast.py                  # Step 4: RFM segmentation + K-Means
 ├── .gitignore
 └── README.md
 ```
@@ -103,8 +105,11 @@ E-Commerce-Sales-Dashboard-Olist/
 - Merged all 9 tables into one **master dataframe** (112,650 rows × 40+ columns)
 - Saved `olist_master.csv` and `olist_delivered.csv` for downstream analysis
 
+---
+
 ### ✅ Phase 2 — Exploratory Data Analysis (EDA)
-Generated 11 charts uncovering key business insights:
+
+Generated **11 professional charts** uncovering key business insights:
 
 | # | Chart | Key Finding |
 |---|-------|-------------|
@@ -120,18 +125,71 @@ Generated 11 charts uncovering key business insights:
 | 10 | Quarterly Growth | 3x revenue growth from Q1 2017 to Q1 2018 |
 | 11 | Late Deliveries | Northern states (AM, RR) have 20%+ late rate |
 
-### ✅ Phase 3 — SQL Analysis 
+---
 
-<<<<<<< Updated upstream
-### ⏳ Phase 4 — RFM Customer Segmentation 
-=======
-### ✅ Phase 4 — RFM Customer Segmentation 
-### ✅ Phase 4 — RFM Customer Segmentation 
-- Segment profiling: Champions, Loyal, At-Risk, Lost
+### ✅ Phase 3 — SQL Analysis
+
+Executed **16 SQL queries** using SQLite covering 3 difficulty levels:
+
+| Level | Queries | Concepts |
+|-------|---------|---------|
+| Basic | Q1–Q5 | GROUP BY, JOINs, aggregations, KPIs |
+| Intermediate | Q6–Q8, Q16 | CASE WHEN, HAVING, date functions |
+| Advanced | Q9–Q15 | CTEs, LAG, RANK, PARTITION BY, Running Totals, Pareto |
+
+Key queries:
+- **Q9** — Month-over-Month revenue growth % using `LAG()` window function
+- **Q10** — Cumulative revenue running total using `SUM() OVER()`
+- **Q12** — Seller ranking within each state using `RANK() PARTITION BY`
+- **Q14** — Impact of late delivery on customer review scores
+- **Q15** — Pareto analysis: top 20% categories driving 80% revenue
+
+Generated **3 SQL result charts:**
+- Month-over-Month revenue growth (green = growth, red = decline)
+- Cumulative revenue curve
+- Late delivery vs review score comparison
+
+---
+
+### ✅ Phase 4 — RFM Customer Segmentation
+
+Performed full **RFM (Recency, Frequency, Monetary)** analysis on 95,000+ customers:
+
+**Scoring:** Each customer scored 1–5 on R, F, M dimensions using quantile-based scoring
+
+**Rule-based segments identified:**
+
+| Segment | Description | Action |
+|---------|-------------|--------|
+| 👑 Champions | Recent, frequent, high spend | Reward & upsell |
+| 💚 Loyal Customers | Regular buyers, good spend | Personalized offers |
+| 🌱 Potential Loyalists | Recent but low frequency | Nurture with campaigns |
+| 🆕 New Customers | Bought recently, first time | Onboarding offers |
+| ⚠️ At Risk | Used to buy, now inactive | Win-back email + coupon |
+| 😴 Needs Attention | Below average on all metrics | Re-engagement |
+| 💤 Lost | Long inactive, low spend | Low-cost campaigns only |
+
+**K-Means Clustering (ML layer):**
+- Used `MiniBatchKMeans` for scalable clustering on 95K customers
+- Elbow method + Silhouette score used to justify **K=4** as optimal
+- Log transformation + StandardScaler applied before clustering
+- Final 4 clusters: Champions, Loyal, At Risk, Lost/Inactive
+
+Generated **6 RFM charts:**
+- Elbow curve + Silhouette score
+- Customer count & revenue share per segment
+- Average spend per segment
+- RFM score heatmap (Recency vs Frequency)
+- Recency vs Monetary scatter plot (coloured by segment)
+- Revenue contribution pie chart
+
+---
 
 ### ⏳ Phase 5 — Revenue Forecasting *(coming soon)*
 - Time series forecasting using Facebook Prophet
 - 3-month ahead revenue prediction with confidence intervals
+- Trend + seasonality decomposition
+- Forecast exported to CSV for Power BI dashboard
 
 ### ⏳ Phase 6 — Power BI Dashboard *(coming soon)*
 - Page 1: Executive KPI overview
@@ -155,11 +213,10 @@ Top Category           :  Health & Beauty
 Most Used Payment      :  Credit Card (74%)
 Average Review Score   :  4.09 / 5.0
 ```
-*(Update these numbers with your actual output)*
 
 ---
 
-## 📈 EDA Charts Preview
+## 📈 Charts Preview
 
 ### Monthly Revenue Trend
 ![Monthly Revenue](charts/chart1_monthly_revenue.png)
@@ -167,11 +224,17 @@ Average Review Score   :  4.09 / 5.0
 ### Top 10 Product Categories
 ![Top Categories](charts/chart2_top_categories.png)
 
-### Review Score Distribution
-![Review Scores](charts/chart6_review_scores.png)
+### Month-over-Month Revenue Growth
+![MoM Growth](charts/sql_chart1_mom_growth.png)
 
-### Late Delivery Rate by State
-![Late Deliveries](charts/chart11_late_deliveries.png)
+### Late Delivery Impact on Review Scores
+![Delivery vs Review](charts/sql_chart3_delivery_vs_review.png)
+
+### RFM Customer Segments — Scatter Plot
+![RFM Scatter](charts/rfm_chart5_scatter.png)
+
+### Revenue Contribution by Segment
+![RFM Pie](charts/rfm_chart6_revenue_pie.png)
 
 ---
 
@@ -179,7 +242,7 @@ Average Review Score   :  4.09 / 5.0
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/E-Commerce-Sales-Dashboard-Olist.git
+git clone https://github.com/Krishna-Dhawangale/E-Commerce-Sales-Dashboard-Olist.git
 cd E-Commerce-Sales-Dashboard-Olist
 ```
 
@@ -194,24 +257,28 @@ and place them in the project root folder.
 
 ### 4. Run the scripts in order
 ```bash
-python olist_starter.py     # Step 1: Load & clean data
-python fix_review_score.py  # Fix: add review scores
-python olist_eda.py         # Step 2: Generate EDA charts
+python olist_starter.py        # Step 1: Load & clean data
+python fix_review_score.py     # Fix: add review scores
+python olist_eda.py            # Step 2: EDA — 11 charts
+python olist_sql_analysis.py   # Step 3: SQL — 16 queries
+python olist_rfm_fast.py       # Step 4: RFM segmentation
 ```
 
 ---
 
 ## 💡 Business Recommendations
 
-Based on the analysis so far:
-
 1. **Focus marketing on São Paulo & Rio de Janeiro** — these two states contribute over 55% of total revenue. Targeted campaigns here will have maximum ROI.
 
-2. **Improve delivery in Northern states** — AM, RR, and PA have late delivery rates above 20%, which directly correlates with lower review scores. Partnering with regional logistics providers could improve satisfaction scores by an estimated 15–20%.
+2. **Improve delivery in Northern states** — AM, RR, and PA have late delivery rates above 20%, which directly correlates with lower review scores. Partnering with regional logistics providers could improve satisfaction scores by 15–20%.
 
-3. **Double down on Health & Beauty category** — highest revenue category with strong repeat purchase potential. Bundle deals and loyalty offers here would increase Customer Lifetime Value.
+3. **Double down on Health & Beauty** — highest revenue category with strong repeat purchase potential. Bundle deals and loyalty offers here would increase Customer Lifetime Value.
 
-4. **Reduce Monday–Wednesday cart abandonment** — peak order days suggest customers browse on weekends but buy on weekdays. Flash sales on Sunday evenings could convert more browsers into buyers.
+4. **Win back At-Risk customers** — RFM analysis identified a significant At-Risk segment that previously purchased regularly. A targeted discount coupon campaign could recover a meaningful share of this lost revenue.
+
+5. **Reward Champions segment** — top customers drive disproportionate revenue. A loyalty program with early access and exclusive offers would retain this high-value group.
+
+6. **Reduce Monday–Wednesday cart abandonment** — peak order days suggest customers browse on weekends but buy on weekdays. Flash sales on Sunday evenings could convert more browsers into buyers.
 
 ---
 
