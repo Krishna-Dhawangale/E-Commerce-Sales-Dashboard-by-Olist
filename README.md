@@ -185,7 +185,7 @@ Generated **6 RFM charts:**
 
 ---
 
-### ⏳ Phase 5 — Revenue Forecasting *(coming soon)*
+### ✅ Phase 5 — Revenue Forecasting 
 - Time series forecasting using Facebook Prophet
 - 3-month ahead revenue prediction with confidence intervals
 - Trend + seasonality decomposition
