@@ -191,7 +191,7 @@ Generated **6 RFM charts:**
 - Trend + seasonality decomposition
 - Forecast exported to CSV for Power BI dashboard
 
-### ⏳ Phase 6 — Power BI Dashboard *(coming soon)*
+### ✅ Phase 6 — Power BI Dashboard 
 - Page 1: Executive KPI overview
 - Page 2: Regional heatmap & category breakdown
 - Page 3: Customer segments (RFM)
