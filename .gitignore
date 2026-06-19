@@ -10,3 +10,9 @@ __pycache__/
 
 # Jupyter
 .ipynb_checkpoints/
+
+olist.db
+*.db
+dashboards/*.png
+*.sqlite
+
