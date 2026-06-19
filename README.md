@@ -3,19 +3,26 @@
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat&logo=python)
 ![Pandas](https://img.shields.io/badge/Pandas-2.0-150458?style=flat&logo=pandas)
 ![PowerBI](https://img.shields.io/badge/Power%20BI-Dashboard-F2C811?style=flat&logo=powerbi)
-![Status](https://img.shields.io/badge/Status-In%20Progress-orange?style=flat)
+![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=flat&logo=sqlite)
+![Status](https://img.shields.io/badge/Status-Completed-success?style=flat)
 ![Dataset](https://img.shields.io/badge/Dataset-100K%2B%20Orders-green?style=flat)
 
-> **End-to-end data analytics project** analyzing 100,000+ real e-commerce orders from Olist, Brazil's largest online marketplace — covering data cleaning, EDA, SQL analysis, customer segmentation, revenue forecasting, and an interactive Power BI dashboard.
+> **End-to-end data analytics project** analyzing 100,000+ real e-commerce orders from Olist,
+> Brazil's largest online marketplace — covering data cleaning, EDA, SQL analysis, RFM customer
+> segmentation, revenue forecasting, and an interactive 4-page Power BI dashboard.
 
 ---
 
 ## 📌 Project Overview
 
-This project simulates the work of a **Data Analyst at an e-commerce company**. Starting from raw transactional data across 9 relational tables, the goal is to uncover revenue patterns, customer behavior, delivery performance, and product insights — and present them in a business-ready dashboard.
+This project simulates the work of a **Data Analyst at an e-commerce company**. Starting from
+raw transactional data across 9 relational tables, the goal is to uncover revenue patterns,
+customer behavior, delivery performance, and product insights — and present them in a
+business-ready dashboard.
 
 **Business Problem:**
-> *"Which factors are driving revenue growth and customer dissatisfaction — and what actions should the business take?"*
+> *"Which factors are driving revenue growth and customer dissatisfaction —
+> and what actions should the business take?"*
 
 ---
 
@@ -35,9 +42,7 @@ This project simulates the work of a **Data Analyst at an e-commerce company**. 
 | `olist_geolocation_dataset.csv` | 1,000,163 | ZIP code lat/lng mapping |
 | `product_category_name_translation.csv` | 71 | Portuguese → English |
 
-- **Total size:** 126 MB
-- **Time period:** September 2016 – October 2018
-- **Total columns across all files:** 52
+- **Total size:** 126 MB | **Time period:** Sep 2016 – Oct 2018 | **Total columns:** 52
 
 ---
 
@@ -47,11 +52,11 @@ This project simulates the work of a **Data Analyst at an e-commerce company**. 
 |------|---------|
 | Python 3.10+ | Data cleaning, EDA, analysis |
 | Pandas & NumPy | Data manipulation |
-| Matplotlib & Seaborn | Data visualization |
+| Matplotlib & Seaborn | Data visualization (25+ charts) |
 | SQLite | SQL analysis (16+ queries) |
-| Scikit-learn | RFM clustering (K-Means) |
-| Prophet | Revenue forecasting |
-| Power BI | Interactive dashboard |
+| Scikit-learn | RFM clustering — MiniBatchKMeans |
+| Facebook Prophet | Revenue forecasting |
+| Power BI | 4-page interactive dashboard |
 | GitHub | Version control & portfolio |
 
 ---
@@ -59,10 +64,10 @@ This project simulates the work of a **Data Analyst at an e-commerce company**. 
 ## 📁 Project Structure
 
 ```
-E-Commerce-Sales-Dashboard-Olist/
+E-Commerce-Sales-Dashboard-by-Olist/
 │
-├── 📂 charts/                         # All output charts
-│   ├── chart1_monthly_revenue.png
+├── 📂 charts/                            # 25 output charts
+│   ├── chart1_monthly_revenue.png        # EDA charts
 │   ├── chart2_top_categories.png
 │   ├── chart3_revenue_by_state.png
 │   ├── chart4_order_status.png
@@ -73,22 +78,34 @@ E-Commerce-Sales-Dashboard-Olist/
 │   ├── chart9_avg_order_value.png
 │   ├── chart10_quarterly_revenue.png
 │   ├── chart11_late_deliveries.png
-│   ├── sql_chart1_mom_growth.png
+│   ├── sql_chart1_mom_growth.png         # SQL charts
 │   ├── sql_chart2_cumulative_revenue.png
 │   ├── sql_chart3_delivery_vs_review.png
-│   ├── rfm_chart1_elbow_curve.png
+│   ├── rfm_chart1_elbow_curve.png        # RFM charts
 │   ├── rfm_chart2_segment_counts.png
 │   ├── rfm_chart3_avg_spend.png
 │   ├── rfm_chart4_heatmap.png
 │   ├── rfm_chart5_scatter.png
-│   └── rfm_chart6_revenue_pie.png
+│   ├── rfm_chart6_revenue_pie.png
+│   ├── forecast_chart1_main.png          # Forecast charts
+│   ├── forecast_chart2_trend.png
+│   ├── forecast_chart3_actual_vs_predicted.png
+│   ├── forecast_chart4_bar.png
+│   └── forecast_chart5_seasonality.png
 │
-├── olist_starter.py                   # Step 1: Load, clean & merge all data
-├── olist_eda.py                       # Step 2: EDA — 11 charts
-├── fix_review_score.py                # Hotfix: merge review scores
-├── olist_sql_analysis.py              # Step 3: SQL — 16 queries + 3 charts
-├── fix_query12.py                     # Hotfix: SQLite window function fix
-├── olist_rfm_fast.py                  # Step 4: RFM segmentation + K-Means
+├── 📂 dashboards/                        # Power BI dashboard files
+│   └── olist_dashboard.pbix
+│
+├── 📂 notebook/                          # Python scripts
+│   ├── olist_starter.py                  # Step 1: Load, clean & merge
+│   ├── olist_EDA.py                      # Step 2: EDA — 11 charts
+│   ├── Fix_review_score.py               # Hotfix: merge review scores
+│   ├── olist_sql_analysis.py             # Step 3: SQL — 16 queries
+│   ├── fix_query12.py                    # Hotfix: SQLite window function
+│   ├── rfm_segmentation.py               # Step 4: RFM + K-Means
+│   ├── olist_forecasting.py              # Step 5: Prophet forecasting
+│   └── fix_map_coordinate.py             # Hotfix: map coordinates
+│
 ├── .gitignore
 └── README.md
 ```
@@ -99,8 +116,8 @@ E-Commerce-Sales-Dashboard-Olist/
 
 ### ✅ Phase 1 — Data Loading & Cleaning
 - Loaded all 9 CSV files into Pandas DataFrames
-- Checked and handled null values across all tables
-- Parsed 5 datetime columns and engineered features:
+- Checked and handled null values across all 9 tables
+- Parsed 5 datetime columns and engineered new features:
   `delivery_days`, `year`, `month`, `quarter`, `day_of_week`
 - Merged all 9 tables into one **master dataframe** (112,650 rows × 40+ columns)
 - Saved `olist_master.csv` and `olist_delivered.csv` for downstream analysis
@@ -113,89 +130,93 @@ Generated **11 professional charts** uncovering key business insights:
 
 | # | Chart | Key Finding |
 |---|-------|-------------|
-| 1 | Monthly Revenue Trend | Peak revenue in Nov 2017 (Black Friday effect) |
+| 1 | Monthly Revenue Trend | Peak revenue Nov 2017 — Black Friday effect |
 | 2 | Top 10 Categories | Health & Beauty leads in total revenue |
-| 3 | Revenue by State | São Paulo (SP) contributes ~42% of all revenue |
+| 3 | Revenue by State | São Paulo contributes ~42% of all revenue |
 | 4 | Order Status | 97%+ orders successfully delivered |
-| 5 | Delivery Time | Average delivery = ~12 days; high variance |
+| 5 | Delivery Time | Average = 12.5 days with high variance |
 | 6 | Review Scores | 57% customers give 5-star ratings |
-| 7 | Payment Methods | Credit card dominates at ~74% |
+| 7 | Payment Methods | Credit card dominates at 74% |
 | 8 | Orders by Day | Monday–Wednesday are peak order days |
 | 9 | Avg Order Value | Computers & accessories have highest AOV |
-| 10 | Quarterly Growth | 3x revenue growth from Q1 2017 to Q1 2018 |
-| 11 | Late Deliveries | Northern states (AM, RR) have 20%+ late rate |
+| 10 | Quarterly Growth | 3× revenue growth from Q1 2017 to Q1 2018 |
+| 11 | Late Deliveries | Northern states have 20%+ late delivery rate |
 
 ---
 
 ### ✅ Phase 3 — SQL Analysis
 
-Executed **16 SQL queries** using SQLite covering 3 difficulty levels:
+Executed **16 SQL queries** using SQLite across 3 difficulty levels:
 
 | Level | Queries | Concepts |
-|-------|---------|---------|
+|-------|---------|----------|
 | Basic | Q1–Q5 | GROUP BY, JOINs, aggregations, KPIs |
 | Intermediate | Q6–Q8, Q16 | CASE WHEN, HAVING, date functions |
 | Advanced | Q9–Q15 | CTEs, LAG, RANK, PARTITION BY, Running Totals, Pareto |
 
-Key queries:
-- **Q9** — Month-over-Month revenue growth % using `LAG()` window function
+**Highlight queries:**
+- **Q9** — Month-over-Month revenue growth using `LAG()` window function
 - **Q10** — Cumulative revenue running total using `SUM() OVER()`
 - **Q12** — Seller ranking within each state using `RANK() PARTITION BY`
-- **Q14** — Impact of late delivery on customer review scores
+- **Q14** — Late delivery impact on customer review scores
 - **Q15** — Pareto analysis: top 20% categories driving 80% revenue
 
-Generated **3 SQL result charts:**
-- Month-over-Month revenue growth (green = growth, red = decline)
-- Cumulative revenue curve
-- Late delivery vs review score comparison
+Generated **3 SQL result charts** — MoM growth, cumulative revenue, delivery vs review score
 
 ---
 
 ### ✅ Phase 4 — RFM Customer Segmentation
 
-Performed full **RFM (Recency, Frequency, Monetary)** analysis on 95,000+ customers:
+Full **RFM (Recency, Frequency, Monetary)** analysis on 95,000+ customers:
 
-**Scoring:** Each customer scored 1–5 on R, F, M dimensions using quantile-based scoring
+**Rule-based segments:**
 
-**Rule-based segments identified:**
-
-| Segment | Description | Action |
-|---------|-------------|--------|
-| 👑 Champions | Recent, frequent, high spend | Reward & upsell |
-| 💚 Loyal Customers | Regular buyers, good spend | Personalized offers |
-| 🌱 Potential Loyalists | Recent but low frequency | Nurture with campaigns |
-| 🆕 New Customers | Bought recently, first time | Onboarding offers |
-| ⚠️ At Risk | Used to buy, now inactive | Win-back email + coupon |
-| 😴 Needs Attention | Below average on all metrics | Re-engagement |
+| Segment | Description | Business Action |
+|---------|-------------|-----------------|
+| 👑 Champions | Recent, frequent, high spend | Reward & upsell premium products |
+| 💚 Loyal Customers | Regular buyers, good spend | Personalized recommendations |
+| 🌱 Potential Loyalists | Recent but low frequency | Nurture with targeted campaigns |
+| 🆕 New Customers | Bought recently, first time | Onboarding & welcome offers |
+| ⚠️ At Risk | Used to buy, now inactive | Win-back email with discount |
+| 😴 Needs Attention | Below average all metrics | Re-engagement campaign |
 | 💤 Lost | Long inactive, low spend | Low-cost campaigns only |
 
-**K-Means Clustering (ML layer):**
-- Used `MiniBatchKMeans` for scalable clustering on 95K customers
-- Elbow method + Silhouette score used to justify **K=4** as optimal
+**K-Means ML Clustering:**
+- `MiniBatchKMeans` for fast, scalable clustering on 95K customers
+- Elbow method + Silhouette score confirm **K=4** as optimal
 - Log transformation + StandardScaler applied before clustering
-- Final 4 clusters: Champions, Loyal, At Risk, Lost/Inactive
 
-Generated **6 RFM charts:**
-- Elbow curve + Silhouette score
-- Customer count & revenue share per segment
-- Average spend per segment
-- RFM score heatmap (Recency vs Frequency)
-- Recency vs Monetary scatter plot (coloured by segment)
-- Revenue contribution pie chart
+Generated **6 RFM charts** including scatter plot, heatmap, elbow curve, and revenue pie
 
 ---
 
-### ✅ Phase 5 — Revenue Forecasting 
-- Time series forecasting using Facebook Prophet
-- 3-month ahead revenue prediction with confidence intervals
-- Trend + seasonality decomposition
-- Forecast exported to CSV for Power BI dashboard
+### ✅ Phase 5 — Revenue Forecasting
 
-### ✅ Phase 6 — Power BI Dashboard 
-- Page 1: Executive KPI overview
-- Page 2: Regional heatmap & category breakdown
-- Page 3: Customer segments (RFM)
-- Page 4: Revenue forecast
+- Time series forecasting using **Facebook Prophet**
+- Multiplicative seasonality with Brazilian public holidays included
+- **3-month ahead revenue forecast** with 95% confidence intervals
+- Model accuracy: evaluated using MAE, MAPE, RMSE on historical data
+- Trend + seasonality decomposition charts generated
+- Forecast exported to `olist_forecast.csv` for Power BI dashboard
+
+Generated **5 forecast charts** including main forecast, trend, actual vs predicted, and seasonality
+
+---
+
+### ✅ Phase 6 — Power BI Dashboard
+
+4-page interactive dashboard built in Power BI Desktop:
+
+| Page | Content |
+|------|---------|
+| 📊 Executive Overview | Total Revenue, Orders, Customers, AOV KPI cards + monthly trend + category bar chart |
+| 🗺️ Regional Analysis | Brazil map + revenue by state + payment methods donut + late delivery chart |
+| 👥 Customer Segments | RFM cluster donut + avg spend bar + recency vs monetary scatter |
+| 📈 Revenue Forecast | 3-month forecast line chart + confidence intervals + forecast table |
+
+**DAX Measures created:**
+- `Total Revenue`, `Total Orders`, `Total Customers`, `Avg Order Value`
+- `Avg Review Score`, `Late Delivery Rate`
 
 ---
 
@@ -208,10 +229,11 @@ Unique Customers       :  95,540
 Average Order Value    :  R$ 140.87
 Average Delivery Time  :  12.5 days
 Late Delivery Rate     :  8.1%
-Top State              :  São Paulo (SP)
+Top State by Revenue   :  São Paulo (SP) — 42% share
 Top Category           :  Health & Beauty
 Most Used Payment      :  Credit Card (74%)
 Average Review Score   :  4.09 / 5.0
+Model Forecast MAPE    :  < 15% (Prophet)
 ```
 
 ---
@@ -233,8 +255,8 @@ Average Review Score   :  4.09 / 5.0
 ### RFM Customer Segments — Scatter Plot
 ![RFM Scatter](charts/rfm_chart5_scatter.png)
 
-### Revenue Contribution by Segment
-![RFM Pie](charts/rfm_chart6_revenue_pie.png)
+### Revenue Forecast — 3 Months Ahead
+![Forecast](charts/forecast_chart1_main.png)
 
 ---
 
@@ -242,8 +264,8 @@ Average Review Score   :  4.09 / 5.0
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/Krishna-Dhawangale/E-Commerce-Sales-Dashboard-Olist.git
-cd E-Commerce-Sales-Dashboard-Olist
+git clone https://github.com/Krishna-Dhawangale/E-Commerce-Sales-Dashboard-by-Olist.git
+cd E-Commerce-Sales-Dashboard-by-Olist
 ```
 
 ### 2. Install dependencies
@@ -255,30 +277,34 @@ pip install pandas numpy matplotlib seaborn scikit-learn prophet
 Download all 9 CSV files from [Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
 and place them in the project root folder.
 
-### 4. Run the scripts in order
+### 4. Run scripts in order
 ```bash
-python olist_starter.py        # Step 1: Load & clean data
-python fix_review_score.py     # Fix: add review scores
-python olist_eda.py            # Step 2: EDA — 11 charts
-python olist_sql_analysis.py   # Step 3: SQL — 16 queries
-python olist_rfm_fast.py       # Step 4: RFM segmentation
+python notebook/olist_starter.py         # Step 1: Load & clean data
+python notebook/Fix_review_score.py      # Fix: add review scores
+python notebook/olist_EDA.py             # Step 2: EDA — 11 charts
+python notebook/olist_sql_analysis.py    # Step 3: SQL — 16 queries
+python notebook/rfm_segmentation.py      # Step 4: RFM segmentation
+python notebook/olist_forecasting.py     # Step 5: Revenue forecast
 ```
+
+### 5. Open the dashboard
+Open `dashboards/olist_dashboard.pbix` in **Power BI Desktop**
 
 ---
 
 ## 💡 Business Recommendations
 
-1. **Focus marketing on São Paulo & Rio de Janeiro** — these two states contribute over 55% of total revenue. Targeted campaigns here will have maximum ROI.
+1. **Focus marketing on São Paulo & Rio de Janeiro** — two states contribute 55%+ of revenue. Targeted campaigns here deliver maximum ROI.
 
-2. **Improve delivery in Northern states** — AM, RR, and PA have late delivery rates above 20%, which directly correlates with lower review scores. Partnering with regional logistics providers could improve satisfaction scores by 15–20%.
+2. **Fix delivery in Northern states** — AL, MA, SE have 20%+ late delivery rates, directly causing lower review scores. Regional logistics partnerships could improve satisfaction by 15–20%.
 
-3. **Double down on Health & Beauty** — highest revenue category with strong repeat purchase potential. Bundle deals and loyalty offers here would increase Customer Lifetime Value.
+3. **Double down on Health & Beauty** — highest revenue category with strong repeat purchase potential. Bundle deals and loyalty programs here increase Customer Lifetime Value significantly.
 
-4. **Win back At-Risk customers** — RFM analysis identified a significant At-Risk segment that previously purchased regularly. A targeted discount coupon campaign could recover a meaningful share of this lost revenue.
+4. **Win back At-Risk customers** — RFM analysis found a large At-Risk segment of previously active buyers. A targeted discount coupon campaign could recover meaningful lost revenue.
 
-5. **Reward Champions segment** — top customers drive disproportionate revenue. A loyalty program with early access and exclusive offers would retain this high-value group.
+5. **Reward Champions** — top customers drive disproportionate revenue. A loyalty program with early access and exclusive offers retains this critical segment.
 
-6. **Reduce Monday–Wednesday cart abandonment** — peak order days suggest customers browse on weekends but buy on weekdays. Flash sales on Sunday evenings could convert more browsers into buyers.
+6. **Launch Sunday evening flash sales** — customers browse on weekends but purchase Monday–Wednesday. Weekend evening promotions convert more browsers into buyers.
 
 ---
 
@@ -293,10 +319,9 @@ python olist_rfm_fast.py       # Step 4: RFM segmentation
 
 ## 📄 License
 
-This project uses the [Olist dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
-which is licensed under **CC BY-NC-SA 4.0**.
-All code in this repository is available under the **MIT License**.
+Dataset: [CC BY-NC-SA 4.0](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) — Olist  
+Code: MIT License
 
 ---
 
-> ⭐ If you found this project helpful, please consider starring the repo!
+> ⭐ If you found this project helpful, please consider starring the repo — it helps others discover it!
